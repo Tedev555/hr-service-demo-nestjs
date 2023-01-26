@@ -8,8 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CatsService } from '../services/cats.service';
-import { CreateCatDto } from './dto/create-cat.dto';
-import { UpdateCatDto } from './dto/update-cat.dto';
+import { CreateCatDto } from '../cats/dto/create-cat.dto';
+import { UpdateCatDto } from '../cats/dto/update-cat.dto';
 
 @Controller('cats')
 export class CatsController {
