@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 // import { User } from '../../src/entities/user.entity';
-import { UserRepository } from '../../src/repositories/user.repository';
-import { User } from 'src/entities/user.entity';
+import { UserRepository } from '../../src/users/user.repository';
+import { User } from '../../src/users/user.entity';
 
 describe('UserRepository', () => {
   let userRepository: UserRepository;
@@ -23,36 +23,6 @@ describe('UserRepository', () => {
 
     userRepository = module.get<UserRepository>(UserRepository);
   });
-
-  //   describe('findAllUsers', () => {
-  //     it('should return an array of users', async () => {
-  //       const users = [
-  //         {
-  //           userId: 1,
-  //           username: 'test1',
-  //         },
-  //         {
-  //           userId: 2,
-  //           username: 'test2',
-  //         },
-  //       ] as User[];
-  //       //       userRepository.findAll.mockReturnValue(users);
-
-  //       expect(userRepository.findAll()).toBe(users);
-  //     });
-  //   });
-
-  //   describe('findById', () => {
-  //     it('should return a user', async () => {
-  //       const user = {
-  //         id: 1,
-  //         name: 'John Doe',
-  //       };
-  //       userRepository.findById.mockReturnValue(user);
-
-  //       expect(userRepository.findById(1)).toBe(user);
-  //     });
-  //   });
 
   describe('create', () => {
     it('should create a user', async () => {
