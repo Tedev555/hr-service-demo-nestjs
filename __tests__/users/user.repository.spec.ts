@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 // import { User } from '../../src/entities/user.entity';
-import { UserRepository } from '../../src/users/user.repository';
-import { User } from '../../src/users/user.entity';
+import { UserRepository } from '../../src/resources/users/user.repository';
+import { User } from '../../src/resources/users/user.entity';
 
 describe('UserRepository', () => {
   let userRepository: UserRepository;

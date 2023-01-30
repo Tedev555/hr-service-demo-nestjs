@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from '../../src/users/user.service';
-import { UserRepository } from '../../src/users/user.repository';
+import { UserService } from '../../src/resources/users/user.service';
+import { UserRepository } from '../../src/resources/users/user.repository';
 import { DataSource } from 'typeorm';
-import { User } from '../../src/users/user.entity';
+import { User } from '../../src/resources/users/user.entity';
+import { UpdateCatDto } from 'src/dtos/update-cat.dto';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -19,30 +20,11 @@ describe('UserService', () => {
       ],
     }).compile();
 
-    // userRepository = {
-    //   findAll: jest.fn(),
-    //   find: jest.fn(),
-    //   findById: jest.fn(),
-    //   create: jest.fn(),
-    // };
-    // userRepository = new UserRepository();
     userRepository = module.get<UserRepository>(UserRepository);
     userService = new UserService(userRepository);
   });
 
-  it('UserRepository should be defined', () => {
-    expect(userRepository).toBeDefined();
-  });
-
-  it('UserService should be defined', () => {
-    expect(userService).toBeDefined();
-  });
-
-  it('userService.create should be defined', () => {
-    expect(userService.create).toBeDefined();
-  });
-
-  it('should called userRepository.create with a User arg', async () => {
+  it('should called userRepository.create with a user', async () => {
     const user = {
       userId: 1,
       username: 'John Doe',
@@ -51,8 +33,11 @@ describe('UserService', () => {
     const createUserSpy = jest
       .spyOn(userRepository, 'save')
       .mockResolvedValue(user);
-    await userService.create(user);
+    // Called implented code
+    const createUserService = await userService.create(user);
 
+    // Expect the results
+    expect(createUserService).toStrictEqual(user);
     expect(createUserSpy).toBeCalledWith(user);
   });
 
@@ -84,29 +69,21 @@ describe('UserService', () => {
       .mockResolvedValue(result);
 
     // Expect the result to be the same as the mock
-    expect(findAllSpy).toBeCalled();
     expect(await userService.findAllUsers()).toStrictEqual(result);
+    expect(findAllSpy).toBeCalled();
   });
 
-  // it('repository.create shoulde be called', async () => {
-  //   const user = {
-  //     id: 1,
-  //     name: 'John Doe',
-  //   };
+  it('should called repository.update() with UpdateUserDTO', async () => {
+    const updateUser = {
+      userId: 1,
+      username: 'John Doe',
+    } as UpdateCatDto;
 
-  //   await userService.create(user);
-  //   expect(userRepository.create).toBeCalledWith(user);
-  // });
-
-  // it('called userRepository.create(user) should return a user', async () => {
-  //   const user = {
-  //     id: 1,
-  //     name: 'John Doe',
-  //   };
-
-  //   userRepository.create.mockReturnValue(user);
-  //   expect(await userService.create(user)).toStrictEqual(user);
-  // });
+    const updateUserSpy = jest.spyOn(userRepository, 'update');
+    const updateUserResult = await userService.update(updateUser);
+    expect(updateUserResult).toStrictEqual(updateUser);
+    expect(updateUserSpy).toBeCalledWith(updateUser);
+  });
 
   // it('should return an array of users', async () => {
   //   const result = [

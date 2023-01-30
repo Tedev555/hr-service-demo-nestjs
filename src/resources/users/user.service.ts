@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Repository } from 'typeorm';
+import { UpdateCatDto } from 'src/dtos/update-cat.dto';
 
 @Injectable()
 export class UserService {
@@ -22,5 +23,10 @@ export class UserService {
 
   findAllUsers(): any {
     return this.userRepository.find();
+  }
+
+  update(updateUser: UpdateCatDto) {
+    return updateUser;
+    // return this.userRepository.update(updateUser.userId, updateUser);
   }
 }
