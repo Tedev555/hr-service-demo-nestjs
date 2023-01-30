@@ -4,6 +4,7 @@ import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { Repository } from 'typeorm';
 import { UpdateCatDto } from 'src/dtos/update-cat.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -18,15 +19,20 @@ export class UserService {
   // }
 
   async create(user: User) {
-    return this.userRepository.save(user);
+    return user;
+    // return this.userRepository.create(user);
   }
 
   findAllUsers(): any {
-    return this.userRepository.find();
+    // return this.userRepository.find();
   }
 
-  update(updateUser: UpdateCatDto) {
-    return updateUser;
-    // return this.userRepository.update(updateUser.userId, updateUser);
+  async update(updateUser: User): Promise<any> {
+    // const result = await this.userRepository.save(updateUser);
+    // return result;
   }
+
+  // async findById(username: string) {
+  //   return this.userRepository.findOne({ username });
+  // }
 }
