@@ -1,5 +1,5 @@
-import { Role } from '../../src/entities/role.entity';
-import { User } from '../../src/resources/users/user.entity';
+import { Role } from '../../../src/entities/role.entity';
+import { User } from '../../../src/resources/users/user.entity';
 describe('User entity', () => {
   let user: User;
 
