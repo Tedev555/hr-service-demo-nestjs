@@ -29,7 +29,7 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToMany((type) => Role)
+  @ManyToMany(() => Role)
   @JoinTable()
   roles: Role[];
 }

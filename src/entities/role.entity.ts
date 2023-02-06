@@ -8,6 +8,7 @@ import {
   JoinTable,
 } from 'typeorm';
 import { User } from '../resources/users/user.entity';
+import { Permission } from './permission.entity';
 
 @Entity('roles')
 export class Role {
@@ -23,10 +24,10 @@ export class Role {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToMany((type) => User, (user) => user.roles)
+  @ManyToMany(() => User, (user) => user.roles)
   users: User[];
 
-  @ManyToMany((type) => Permissions)
+  @ManyToMany(() => Permission)
   @JoinTable()
-  permissions: Permissions[];
+  permissions: Permission[];
 }
