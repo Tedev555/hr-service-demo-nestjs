@@ -8,6 +8,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/resources/users/user.entity';
 import { Permission } from 'src/entities/permission.entity';
 import { Role } from 'src/entities/role.entity';
+import { PermissionsController } from 'src/resources/permissions/permissions.controller';
+import { PermissionsModule } from 'src/resources/permissions/permissions.module';
+import { PermissionsService } from 'src/resources/permissions/permissions.service';
 
 @Module({
   imports: [
@@ -27,8 +30,9 @@ import { Role } from 'src/entities/role.entity';
       inject: [ConfigService],
     }),
     CatsModule,
+    PermissionsModule,
   ],
-  controllers: [AppController, ExampleController],
-  providers: [AppService],
+  controllers: [AppController, ExampleController, PermissionsController],
+  providers: [AppService, PermissionsService],
 })
 export class AppModule {}
