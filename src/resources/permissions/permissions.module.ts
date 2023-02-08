@@ -9,5 +9,6 @@ import { Repository } from 'typeorm';
   imports: [TypeOrmModule.forFeature([Permission])],
   controllers: [PermissionsController],
   providers: [PermissionsService],
+  exports: [TypeOrmModule],
 })
 export class PermissionsModule {}

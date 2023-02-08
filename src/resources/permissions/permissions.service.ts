@@ -9,17 +9,20 @@ import { Permission } from 'src/entities/permission.entity';
 export class PermissionsService {
   constructor(
     @InjectRepository(Permission)
-    private readonly permissionRepository: Repository<Permission>,
+    private permissionRepository: Repository<Permission>,
   ) {}
 
-  create(createPermissionDto: CreatePermissionDto) {
-    console.log('createPermissionDto', createPermissionDto);
-
-    return 'This action adds a new permission';
+  async create(createPermissionDto: CreatePermissionDto) {
+    try {
+      const result = await this.permissionRepository.save(createPermissionDto);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   findAll() {
-    return `This action returns all permissions`;
+    return this.permissionRepository.find();
   }
 
   findOne(id: number) {
